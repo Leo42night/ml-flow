@@ -1,88 +1,43 @@
 name: CI
- 
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 permissions:
   contents: write
 
 env:
   CSV_URL: "MLproject/train_pca.csv"
- 
+
 jobs:
   build:
     runs-on: ubuntu-latest
- 
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE
-      - uses: actions/checkout@v3
- 
-      # Setup Python 3.12.7
+      - uses: actions/checkout@v4
+
       - name: Set up Python 3.12.7
         uses: actions/setup-python@v4
         with:
           python-version: "3.12.7"
-      
-      # Check Env Variables
+
       - name: Check Env
-        run: |
-          echo $CSV_URL
- 
-      # Install mlflow
+        run: echo $CSV_URL
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install mlflow
-      
-      # Run as a mlflow project
+          pip install mlflow google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+
       - name: Run mlflow project
-        run: |
-          mlflow run MLproject --env-manager=local 
- 
-      # Save models to GitHub Repository
-      - name: Save mlruns to repo
-        run: |
-          git config --global user.name ${{ secrets.username }}
-          git config --global user.email ${{ secrets.email }}
-          git add mlruns/
-          git commit -m "Save mlruns from CI run"
-          git push origin main
+        run: mlflow run MLproject --env-manager=local
 
-
-      # OPTIONAL (V1 Save)
-      - name: Set up Git LFS
-        run: |
-          git config --global user.name ${{ secrets.username }}
-          git config --global user.email ${{ secrets.email }}
-          git lfs install
-          git lfs track "mlruns/**"
-          git add .gitattributes
-          git commit -m "Track large files in mlruns with Git LFS" || true
-          git push origin main
-          
-      # # Save models to GitHub Repository
-      - name: Save mlruns to repo
-        run: |
-          git config --global user.name ${{ secrets.username }}
-          git config --global user.email ${{ secrets.email }}
-          git add -f mlruns/
-          git commit -m "Save mlruns from CI run" || true
-          git push origin main
-
-      # V2 Save
-      # Cloud Storage
-      - name: Install Python dependencies
-        run: |
-          pip install --upgrade google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
-        
+      # ✅ Upload ke Google Drive (bukan Git)
       - name: Upload to Google Drive
         env:
-          GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}  # Mengambil kredensial dari GitHub Secrets
-          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}  # Mengambil kredensial dari GitHub Secrets
-        run: |
-          python MLproject/upload_to_gdrive.py
+          GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
+          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+        run: python MLproject/upload_to_gdrive.py
