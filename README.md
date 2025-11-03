@@ -9,4 +9,4 @@ Dicoding - Membangun Sistem Machine Learning
   - GDRIVE_CREDENTIALS
   - GDRIVE_FOLDER_ID
 
-permission
+per
