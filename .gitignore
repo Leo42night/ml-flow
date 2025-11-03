@@ -1,4 +1,2 @@
-# MLflow tracking outputs
-# mlruns/
-# mlartifacts/
-mlflow.db
+# Ignore mlruns in local environments
+mlruns/
