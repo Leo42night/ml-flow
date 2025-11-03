@@ -1,4 +1,4 @@
 # MLflow tracking outputs
-mlruns/
-mlartifacts/
+# mlruns/
+# mlartifacts/
 mlflow.db
