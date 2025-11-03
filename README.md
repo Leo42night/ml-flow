@@ -1,7 +1,7 @@
 # Project
 Dicoding - Membangun Sistem Machine Learning
 
-## Requireq
+## Requireq mlflow
 - Up To GDrvie: service account
 - Secret:
   - username
