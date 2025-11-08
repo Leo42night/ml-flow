@@ -21,10 +21,10 @@ jobs:
         with:
           lfs: true   # <--- ini penting, otomatis ambil file LFS
 
-      # - name: Install Git LFS manually (backup)
-      #   run: |
-      #     git lfs install
-      #     git lfs pull
+      - name: Install Git LFS manually (backup)
+        run: |
+          git lfs install
+          git lfs pull
 
       # Setup Python 3.12.7
       - name: Set up Python 3.12.7
@@ -51,7 +51,6 @@ jobs:
         run: |
           git config --global user.name ${{ secrets.username }}
           git config --global user.email ${{ secrets.email }}
-          git lfs install
           git lfs track "mlruns/**"
           git add .gitattributes
           git commit -m "Track large files in mlruns with Git LFS" || true
