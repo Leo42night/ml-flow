@@ -18,8 +18,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        # with:
-        #   lfs: true   # <--- ini penting, otomatis ambil file LFS
+        with:
+          lfs: true   # <--- ini penting, otomatis ambil file LFS
 
       # - name: Install Git LFS manually (backup)
       #   run: |
