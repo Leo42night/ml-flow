@@ -15,6 +15,20 @@ if __name__ == "__main__":
     np.random.seed(40)
  
     file_path = sys.argv[3] if len(sys.argv) > 3 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "train_pca.csv")
+    
+    # Debugging print
+    print("=" * 60)
+    print("[DEBUG] Current working directory:", os.getcwd())
+    print("[DEBUG] Script directory:", current_dir)
+    print("[DEBUG] Dataset file path:", file_path)
+    print("[DEBUG] Dataset exists?", os.path.exists(file_path))
+    print("=" * 60)
+
+    if not os.path.exists(file_path):
+        print("[ERROR] Dataset not found at:", file_path)
+        sys.exit(1)
+    
+    # Load data
     data = pd.read_csv(file_path)
  
     X_train, X_test, y_train, y_test = train_test_split(
