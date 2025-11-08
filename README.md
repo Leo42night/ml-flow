@@ -28,7 +28,7 @@ python modelling.py
 python modellingopt.py
 ```
 ## In Github Action
-Using `MLproject/` and `./github/workflows/config.yaml`
+Using `MLproject/` and `./github/workflows/config.yaml`. Sebelup push ke Github, cek jalankan di local (folder `mlruns/` akan dibuat):
 ```bash
 mlflow run MLproject --env-manager=local
 ```
@@ -36,6 +36,11 @@ mlflow run MLproject --env-manager=local
 ```bash
 mlflow.exceptions.MlflowException: When an mlflow-artifacts URI was supplied, the tracking URI must be a valid http or https URI, but it was currently set to file:///C:
 ```
+Cek `config.yaml` dan lakukan:
+- Masukkan `secret` yang dibutuhkan ke setingan di Github Repo. 
+- Pastikan nama branch sama dengan yang ada di repo. 
+- Hilangkan `/mlruns` di `.gitignore` karena folder dibutuhkan untuk proses simpan GA.
+Jika sudah, bisa push ke repo masing-masing dan cek hasilnya.
 
 ## Update Log
 Handle waring di **modelling.py & modellingopt.py** (mlflow 3.5.1)
