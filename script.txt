@@ -1,0 +1,21 @@
+cd %HOMEPATH%/Documents/Dicoding/msml/mlflow && conda activate credit_scoring && mlflow server --host 127.0.0.1 --port 5000
+cd %HOMEPATH%/Documents/Dicoding/msml/mlflow && conda activate credit_scoring && python modelling.py
+cd %HOMEPATH%/Documents/Dicoding/msml/mlflow && conda activate credit_scoring
+mlflow server --host 127.0.0.1 --port 5000
+python modelling.py
+python modellingopt.py
+mlflow run MLproject --env-manager=local
+
+cd ~/Documents/Dicoding/msml/mlflow
+C:\Users\ADVAN\AppData\Roaming\Python\Python312\Scripts\
+
+git lfs install
+
+git remote add origin https://github.com/Leo42night/ml-flow
+git log --all -- mlruns/
+# Hapus folder dari seluruh history
+git filter-repo --path mlruns/ --invert-paths
+
+# Push hasilnya ke remote (force push!)
+git push origin --force --all
+git push origin --force --tags
