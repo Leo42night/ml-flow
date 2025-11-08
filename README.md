@@ -27,6 +27,8 @@ python modelling.py
 ```bash
 python modellingopt.py
 ```
+`./github/workflows/config.yaml`sudah di set untuk upload log model ke Github. `.gitattributes` digunakan untuk handle file > 100 Mb (model & dataset).
+
 ## In Github Action
 Using `MLproject/` and `./github/workflows/config.yaml`. Sebelup push ke Github, cek jalankan di local (folder `mlruns/` akan dibuat):
 ```bash
