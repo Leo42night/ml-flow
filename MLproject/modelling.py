@@ -7,7 +7,9 @@ import numpy as np
 import os
 import warnings
 import sys
- 
+
+# Run without tracking_uri, menyimpan seluruh logging model pada repositori GitHub
+
 if __name__ == "__main__":
     warnings.filterwarnings("ignore")
     np.random.seed(40)
@@ -33,7 +35,7 @@ if __name__ == "__main__":
  
         mlflow.sklearn.log_model(
         sk_model=model,
-        artifact_path="model",
+        name="model",
         input_example=input_example
         )
         model.fit(X_train, y_train)

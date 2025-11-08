@@ -12,6 +12,8 @@ mlflow.set_experiment("Latihan Credit Scoring")
 
 data = pd.read_csv("train_pca.csv")
 
+data = data.astype({col: "float64" for col in data.columns if data[col].dtype == "int64"})
+
 X_train, X_test, y_train, y_test = train_test_split(
     data.drop("Credit_Score", axis=1),
     data["Credit_Score"],
@@ -29,7 +31,7 @@ with mlflow.start_run():
     model = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth)
     mlflow.sklearn.log_model(
         sk_model=model,
-        artifact_path="model",
+        name="model",
         input_example=input_example
     )
     model.fit(X_train, y_train)

@@ -19,6 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Setup Python 3.12.7
       - name: Set up Python 3.12.7
         uses: actions/setup-python@v4
         with:
@@ -27,17 +28,39 @@ jobs:
       - name: Check Env
         run: echo $CSV_URL
 
-      - name: Install dependencies
+      # A1: Save in Local Github
+      # Install mlflow
+      - name: Install dependencies mlflow
         run: |
           python -m pip install --upgrade pip
-          pip install mlflow google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
-
+          pip install mlflow
+      
+      # Run as a mlflow project
       - name: Run mlflow project
-        run: mlflow run MLproject --env-manager=local
+        run: |
+          mlflow run MLproject --env-manager=local 
 
-      # ✅ Upload ke Google Drive (bukan Git)
-      - name: Upload to Google Drive
-        env:
-          GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
-          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
-        run: python MLproject/upload_to_gdrive.py
+      # Save models to GitHub Repository
+      - name: Save mlruns to repo
+        run: |
+          git config --global user.name ${{ secrets.USERNAME }}
+          git config --global user.email ${{ secrets.EMAIL }}
+          git add mlruns/
+          git commit -m "Save mlruns from CI run"
+          git push origin main
+      
+      # A2: Save in Google Drive
+      # - name: Install dependencies
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install mlflow google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+
+      # - name: Run mlflow project
+      #   run: mlflow run MLproject --env-manager=local
+
+      # # ✅ Upload ke Google Drive (bukan Git)
+      # - name: Upload to Google Drive
+      #   env:
+      #     GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
+      #     GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+      #   run: python MLproject/upload_to_gdrive.py

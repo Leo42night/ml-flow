@@ -1,2 +1,4 @@
 # Ignore mlruns in local environments
 mlruns/
+
+local.txt
