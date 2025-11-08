@@ -1,0 +1,5 @@
+# Contoh: semua file CSV besar dilacak dengan LFS
+*.csv filter=lfs diff=lfs merge=lfs -text
+
+# Contoh: folder mlruns/ beserta isinya
+mlruns/** filter=lfs diff=lfs merge=lfs -text
