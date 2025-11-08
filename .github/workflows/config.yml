@@ -35,6 +35,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install mlflow
       
+      - name: Copy dataset to working dir
+        run: cp MLproject/train_pca.csv train_pca.csv
+      
       # Run as a mlflow project
       - name: Run mlflow project
         run: |
