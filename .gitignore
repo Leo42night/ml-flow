@@ -1,4 +1,4 @@
-# Ignore mlruns in local environments (comment jika ingin save file log ke github repo)
 mlruns/ 
+mlartifacts/ 
 
 local.txt

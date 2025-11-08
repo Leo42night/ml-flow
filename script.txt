@@ -1,6 +1,8 @@
 cd %HOMEPATH%/Documents/Dicoding/msml/mlflow && conda activate credit_scoring && mlflow server --host 127.0.0.1 --port 5000
 cd %HOMEPATH%/Documents/Dicoding/msml/mlflow && conda activate credit_scoring && python modelling.py
 cd %HOMEPATH%/Documents/Dicoding/msml/mlflow && conda activate credit_scoring
+cd %HOMEPATH%/Documents/Dicoding/msml/mlflow
+conda activate credit_scoring && mlflow server --host 127.0.0.1 --port 5000
 mlflow server --host 127.0.0.1 --port 5000
 python modelling.py
 python modellingopt.py
