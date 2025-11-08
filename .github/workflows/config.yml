@@ -18,6 +18,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true   # <--- ini penting, otomatis ambil file LFS
+
+      - name: Install Git LFS manually (backup)
+        run: |
+          git lfs install
+          git lfs pull
 
       # Setup Python 3.12.7
       - name: Set up Python 3.12.7
