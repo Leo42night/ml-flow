@@ -31,6 +31,14 @@ if __name__ == "__main__":
     
     # Load data
     data = pd.read_csv(file_path)
+    
+    # Tampilkan info debug
+    print("[DEBUG] Dataset loaded successfully!")
+    print("[DEBUG] Dataset shape:", data.shape)
+    print("[DEBUG] Columns:", list(data.columns))
+    print("[DEBUG] First 5 rows:")
+    print(data.head().to_string())
+    print("=" * 60)
  
     X_train, X_test, y_train, y_test = train_test_split(
     data.drop("Credit_Score", axis=1),
