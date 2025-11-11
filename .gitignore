@@ -1,4 +1,6 @@
 mlruns/ 
 mlartifacts/ 
-
+.env
 local.txt
+secret.json
+client_secret.json

@@ -6,7 +6,26 @@ conda activate credit_scoring && mlflow server --host 127.0.0.1 --port 5000
 mlflow server --host 127.0.0.1 --port 5000
 python modelling.py
 python modellingopt.py
-mlflow run MLproject --env-manager=local
+conda activate credit_scoring && mlflow run MLproject --env-manager=local
+
+# 1️⃣ Buat environment baru (misal bernama "ncf-env")
+python -m venv ncf-env
+
+# 2️⃣ Aktifkan environment
+# --- Windows
+ncf-env\Scripts\activate
+
+# --- macOS / Linux
+source ncf-env/bin/activate
+
+# 1️⃣ Buat environment baru dengan Python 3.12 (misalnya)
+conda create -n ncf-env python=3.12
+
+# 2️⃣ Aktifkan environment
+conda activate ncf-env
+
+pip freeze > requirements.txt
+
 
 cd ~/Documents/Dicoding/msml/mlflow
 C:\Users\ADVAN\AppData\Roaming\Python\Python312\Scripts\
@@ -21,3 +40,20 @@ git filter-repo --path mlruns/ --invert-paths
 # Push hasilnya ke remote (force push!)
 git push origin --force --all
 git push origin --force --tags
+
+
+python MLproject\up_to_grdive_oauth.py
+python MLproject\up_to_grdive_oauthv2.py
+
+=ARRAYFORMULA(
+  IF(REGEXMATCH(LOWER(C:C);"mata kuliah"); E:E; "")
+)
+=ARRAYFORMULA(
+  IF(REGEXMATCH(LOWER(C:C);"pengajar"); E:E; "")
+)
+
+=FILTER(
+  sorted!A:Z;
+  LEN(sorted!C:C);
+  NOT( REGEXMATCH( LOWER(sorted!C:C); "(mata kuliah|pengajar|laporan|program|periode|^no$|dicetak)" ) )
+)
